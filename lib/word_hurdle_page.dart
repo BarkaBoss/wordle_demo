@@ -23,6 +23,25 @@ class _WordHurdleState extends State<WordHurdle> {
       appBar: AppBar(
         title: const Text("Word Hurdle"),
       ),
+      body: Center(
+        child: Column(
+          children: [
+            Consumer<HurdleProvider>(
+              builder: (context, provider, child) => GridView.builder(
+                  gridDelegate: const  SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                  ),
+                  itemCount: provider.hurdleBoard.length,
+                  itemBuilder: (context, index){
+                    provider.hurdleBoard[index];
+                  }
+                  ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
