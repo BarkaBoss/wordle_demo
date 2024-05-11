@@ -10,6 +10,7 @@ class HurdleProvider extends ChangeNotifier{
   List<String> rowInputs = [];
   List<String> excludedLetters = [];
   List<Wordle> hurdleBoard = [];
+  String targetWord = '';
 
   init(){
     totalWords = words.all.where((element) => element.length == 5).toList();
@@ -17,5 +18,10 @@ class HurdleProvider extends ChangeNotifier{
 
   generateBoard(){
     hurdleBoard = List.generate(30, (index) => Wordle(letter: ''));
+  }
+
+  generateRandomWord(){
+    targetWord = totalWords[random.nextInt(totalWords.length)].toUpperCase();
+    print(targetWord);
   }
 }
