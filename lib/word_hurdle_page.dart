@@ -48,7 +48,14 @@ class _WordHurdleState extends State<WordHurdle> {
                 ),
               ),
             ),
-            const KeyboardView()
+            Consumer<HurdleProvider>(
+              builder:(context, provider, child)=> KeyboardView(
+                excludedLetters: provider.excludedLetters,
+                onPressed: (value){
+                  provider.inputLetters(value);
+                }
+              ),
+            )
           ],
         ),
       ),

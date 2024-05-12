@@ -26,4 +26,8 @@ class HurdleProvider extends ChangeNotifier{
     targetWord = totalWords[random.nextInt(totalWords.length)].toUpperCase();
     print(targetWord);
   }
+
+  inputLetters(String letter){
+    rowInputs.add(letter);
+  }
 }

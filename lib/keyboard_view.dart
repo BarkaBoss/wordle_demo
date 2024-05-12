@@ -25,8 +25,10 @@ class KeyboardView extends StatelessWidget {
                 children: keysList[i]
                     .map((e) => VirtualKey(
                         letter: e,
-                        excluded: excludedLetters.contains(e ),
-                        onPress: (value) {}))
+                        excluded: excludedLetters.contains(e),
+                        onPress: (value) {
+                          onPressed(value);
+                        }))
                     .toList(),
               )
           ],
@@ -55,7 +57,9 @@ class VirtualKey extends StatelessWidget {
               backgroundColor: excluded ? Colors.red : Colors.black,
               foregroundColor: Colors.white,
               padding: EdgeInsets.zero),
-          onPressed: onPress(letter),
+          onPressed: (){
+              onPress(letter);
+            },
           child: Text(letter)),
     );
   }
