@@ -53,4 +53,5 @@ class HurdleProvider extends ChangeNotifier{
 
     notifyListeners();
   }
+  bool get isAValidWord => totalWords.contains(rowInputs.join('').toLowerCase());
 }

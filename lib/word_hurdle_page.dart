@@ -63,7 +63,14 @@ class _WordHurdleState extends State<WordHurdle> {
                     ElevatedButton(onPressed: () {
                       provider.deleteLetter();
                     }, child: const Text("DELETE")),
-                    ElevatedButton(onPressed: () {}, child: const Text("SUBMIT"))
+                    ElevatedButton(onPressed: () {
+                      if(!provider.isAValidWord){
+                        ScaffoldMessenger.of(context).
+                        showSnackBar(const SnackBar(content
+                            : Text("Not a word in my dictionary")));
+                        return;
+                      }
+                    }, child: const Text("SUBMIT"))
                   ],
                 ),
               ),
