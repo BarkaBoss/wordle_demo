@@ -54,4 +54,7 @@ class HurdleProvider extends ChangeNotifier{
     notifyListeners();
   }
   bool get isAValidWord => totalWords.contains(rowInputs.join('').toLowerCase());
+
+  bool get shouldCheckForAnswer => rowInputs.length == lettersPerRow;
+  bool get checkAnswer => targetWord == rowInputs.join('');
 }

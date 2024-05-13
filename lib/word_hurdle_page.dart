@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wordle/helper_funtions.dart';
 import 'package:wordle/hurlde_provider.dart';
 import 'package:wordle/keyboard_view.dart';
 import 'package:wordle/wordle_view.dart';
@@ -65,10 +66,18 @@ class _WordHurdleState extends State<WordHurdle> {
                     }, child: const Text("DELETE")),
                     ElevatedButton(onPressed: () {
                       if(!provider.isAValidWord){
-                        ScaffoldMessenger.of(context).
-                        showSnackBar(const SnackBar(content
-                            : Text("Not a word in my dictionary")));
+                        showMessage(context, "Not a word in my dictionary");
                         return;
+                      }
+                      if(provider.shouldCheckForAnswer){
+                        if(provider.checkAnswer){
+                          showResult(context: context,
+                              title: "Congratulations!!",
+                              body: "The word is ${provider.targetWord}",
+                              onPlayAgain: (){},
+                              onCancel: (){}
+                          );
+                        }
                       }
                     }, child: const Text("SUBMIT"))
                   ],
