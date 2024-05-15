@@ -22,6 +22,7 @@ class _WordHurdleState extends State<WordHurdle> {
 
   @override
   Widget build(BuildContext context) {
+    bool isChecked = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Word Hurdle"),
@@ -70,14 +71,35 @@ class _WordHurdleState extends State<WordHurdle> {
                         return;
                       }
                       if(provider.shouldCheckForAnswer){
-                        if(provider.checkAnswer){
-                          showResult(context: context,
-                              title: "Congratulations!!",
-                              body: "The word is ${provider.targetWord}",
-                              onPlayAgain: (){},
-                              onCancel: (){}
-                          );
-                        }
+                        provider.checkCorrectAnswer();
+                      }
+                      if(provider.win){
+                        // showResult(context: context,
+                        //     title: "Congratulations!!",
+                        //     body: "The word is ${provider.targetWord}",
+                        //     onPlayAgain: (){},
+                        //     onCancel: (){}
+                        // );
+
+                        showDia(context: context, title: "Test", body: "body",
+                            isChecked: false,
+                            onConfirm: (){},
+                            onCancel: (){},
+                          checkBox: StatefulBuilder(
+                            builder: (BuildContext context, StateSetter setState) {
+                              return Checkbox(
+                                  checkColor: Colors.white,
+                                  value: isChecked,
+                                  onChanged: (value){
+
+                                    setState(() {
+                                      isChecked = value!;
+                                      print(isChecked);
+                                    });
+                                  });
+                            },
+                          )
+                        );
                       }
                     }, child: const Text("SUBMIT"))
                   ],

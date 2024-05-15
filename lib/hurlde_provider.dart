@@ -14,6 +14,9 @@ class HurdleProvider extends ChangeNotifier{
   int count = 0;
   int index = 0;
   final lettersPerRow = 5;
+  final totalAttempts = 6;
+  int attempts  = 0;
+  bool win = false;
 
   init(){
     totalWords = words.all.where((element) => element.length == 5).toList();
@@ -57,4 +60,33 @@ class HurdleProvider extends ChangeNotifier{
 
   bool get shouldCheckForAnswer => rowInputs.length == lettersPerRow;
   bool get checkAnswer => targetWord == rowInputs.join('');
+
+  void checkCorrectAnswer(){
+    if(targetWord == rowInputs.join('')){
+      win = true;
+    }else{
+      _markLetterOnBoard();
+      if(attempts < totalAttempts){
+        _goToNextRow();
+      }
+    }
+  }
+
+  void _markLetterOnBoard() {
+    for(int i = 0; i <  hurdleBoard.length; i++){
+      if(hurdleBoard[i].letter.isNotEmpty && targetWord.contains(hurdleBoard[i].letter)){
+        hurdleBoard[i].existsInTarget = true;
+      }else if(hurdleBoard[i].letter.isNotEmpty && !targetWord.contains(hurdleBoard[i].letter)){
+        hurdleBoard[i].doesNotExistsInTarget = true;
+        excludedLetters.add(hurdleBoard[i].letter);
+      }
+    }
+    notifyListeners();
+  }
+
+  void _goToNextRow() {
+    attempts++;
+    count  = 0;
+    rowInputs.clear();
+  }
 }
